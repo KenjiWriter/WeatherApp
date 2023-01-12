@@ -8,18 +8,20 @@
     <title>Weather APP By Wenzzi</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header">
-                <h1>Weather for {{ $data['name'] }}, {{ $data['sys']['country'] }}</h1>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Temperature: {{ $data['main']['temp'] }} &#8457;</p>
-                <p class="card-text">Humidity: {{ $data['main']['humidity'] }}%</p>
-                <p class="card-text">Wind Speed: {{ $data['wind']['speed'] }}mph</p>
-                <p class="card-text">Description: {{ $data['weather'][0]['description'] }}</p>
+    @isset($data)
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Weather for {{ $data['data'][0]['city_name'] }}, {{ $data['data'][0]['country_code'] }}</h1>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Temperature: {{ $data['data'][0]['temp'] }} {{$data['data'][0]['unit']}}</p>
+                    <p class="card-text">Weather Description: {{ $data['data'][0]['weather']['description'] }}</p>
+                    <p class="card-text">Wind Speed: {{ $data['data'][0]['wind_spd'] }} {{$data['data'][0]['wind_cdir']}}</p>
+                    <p class="card-text">Humidity: {{ $data['data'][0]['rh'] }}%</p>
+                </div>
             </div>
         </div>
-    </div>
+    @endisset
 </body>
 </html>

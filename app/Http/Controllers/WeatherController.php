@@ -7,14 +7,22 @@ use GuzzleHttp\Client;
 
 class WeatherController extends Controller
 {
-    public function index()
+    public function index($city, $unit)
     {
         $client = new Client();
-        $apiKey = '4346aa1afacacb5c623f2a583f30e617';
-        $city = 'San Francisco';
-        $response = $client->get("http://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&units=imperial");
-        $data = json_decode($response->getBody(), true);
-        
-        return view('weather', ['data' => $data]);
+        $apiKey = 'ed9c834f18304b68880ee2f5184272a5';
+        if(!empty($city)) {
+            $response = $client->get("https://api.weatherbit.io/v2.0/current?city={$city}&units={$unit}&key={$apiKey}");
+            $data = json_decode($response->getBody(), true);
+            if ($unit == 'metric') {
+                $data['data'][0]['temp'] = round(($data['data'][0]['temp'] - 32) * 5/9, 2);
+                $data['data'][0]['unit'] = "Celsius";
+            } else {
+                $data['data'][0]['unit'] = "Fahrenheit";
+            }
+            return view('weather', ['data' => $data]);
+        } else {
+            return view('weather');
+        }
     }
 }
