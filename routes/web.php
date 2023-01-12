@@ -14,4 +14,4 @@ use App\Http\Controllers\WeatherController;
 |
 */
 
-Route::get('/', 'WeatherController@index');
+Route::get('/', [WeatherController::class, 'index']);
