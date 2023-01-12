@@ -8,6 +8,23 @@
     <title>Weather APP By Wenzzi</title>
 </head>
 <body>
+    <div class="container mt-5">
+        <form action="{{ route('weather') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+            </div>
+            <div class="form-group">
+                <label for="unit">Unit</label>
+                <select class="form-control" id="unit" name="unit">
+                    <option value="metric">Celsius</option>
+                    <option value="imperial">Fahrenheit</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     @isset($data)
         <div class="container mt-5">
             <div class="card">
