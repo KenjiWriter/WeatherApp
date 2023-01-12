@@ -6,39 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Weather APP By Wenzzi</title>
+    @livewireStyles
 </head>
 <body>
     <div class="container mt-5">
-        <form action="{{ route('weather') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
-            </div>
-            <div class="form-group">
-                <label for="unit">Unit</label>
-                <select class="form-control" id="unit" name="unit">
-                    <option value="metric">Celsius</option>
-                    <option value="imperial">Fahrenheit</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        @livewire('weather')
     </div>
-    @isset($data)
-        <div class="container mt-5">
-            <div class="card">
-                <div class="card-header">
-                    <h1>Weather for {{ $data['data'][0]['city_name'] }}, {{ $data['data'][0]['country_code'] }}</h1>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Temperature: {{ $data['data'][0]['temp'] }} {{$data['data'][0]['unit']}}</p>
-                    <p class="card-text">Weather Description: {{ $data['data'][0]['weather']['description'] }}</p>
-                    <p class="card-text">Wind Speed: {{ $data['data'][0]['wind_spd'] }} {{$data['data'][0]['wind_cdir']}}</p>
-                    <p class="card-text">Humidity: {{ $data['data'][0]['rh'] }}%</p>
-                </div>
-            </div>
-        </div>
-    @endisset
+    @livewireScripts
 </body>
 </html>
